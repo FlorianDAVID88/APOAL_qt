@@ -1,18 +1,29 @@
-#include "mainwindow.hpp"
+#include "GameWindow.hpp"
 #include <QApplication>
 #include <QPushButton>
 #include <QLabel>
 #include <QMessageBox>
+#include <QPicture>
 
-MainWindow::MainWindow(QWidget *parent) : QWidget(parent) {
+GameWindow::GameWindow(QWidget *parent) : QWidget(parent) {
     // Set size of the window
     setFixedSize(900, 400);
 
+    // Get current path
+    QString path = QCoreApplication::applicationDirPath();
+
+    // Add logo
+    QLabel *label = new QLabel(this);
+    label->setGeometry(350, 100, 200, 200);
+
+    QPixmap pixmap(path + "/assets/logo.png");
+    label->setPixmap(pixmap.scaled(200, 200, Qt::KeepAspectRatio));
+
     int LINE = 4;
     int COLUMN = 6;
-    int BTN_WIDTH = 90;
-    int BTN_HEIGHT = 50;
-    int BTN_MARGIN = 15;
+    int BTN_WIDTH = 70;
+    int BTN_HEIGHT = 30;
+    int BTN_MARGIN = 5;
     int BOXES = LINE * COLUMN;
 
     const QString EXISTING_PRICES[] = {
@@ -64,13 +75,12 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent) {
         labels.push_back(label);
     }
 
-
     // Create the buttons
     for (int i = 0; i < LINE; ++i) {
         for (int j = 0; j < COLUMN; ++j) {
             int boxId = i + (j * 4) + 1;
             QPushButton *m_button = new QPushButton(QString::number(boxId), this);
-            m_button->setGeometry(200 + ((BTN_WIDTH + BTN_MARGIN) * i), 10 + ((BTN_HEIGHT + BTN_MARGIN) * j), BTN_WIDTH,
+            m_button->setGeometry(220 + ((BTN_WIDTH + BTN_MARGIN) * i), 10 + ((BTN_HEIGHT + BTN_MARGIN) * j), BTN_WIDTH,
                                   BTN_HEIGHT);
 
             // Add the button to the list
@@ -82,7 +92,7 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent) {
     }
 }
 
-void MainWindow::openBox(QPushButton *button) {
+void GameWindow::openBox(QPushButton *button) {
     // Open the box = hide the button
     button->hide();
     // Get price
@@ -101,6 +111,6 @@ void MainWindow::openBox(QPushButton *button) {
     msgBox.exec();
 }
 
-void MainWindow::createView() {
+void GameWindow::createView() {
 
 }

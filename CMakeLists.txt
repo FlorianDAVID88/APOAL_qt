@@ -9,7 +9,8 @@ find_package(Qt5 COMPONENTS Widgets REQUIRED)
 
 set(SOURCES
         main.cpp
-        mainwindow.cpp)
+        views/GameWindow.cpp
+        views/MainMenuWindow.hpp views/MainMenuWindow.cpp)
 
 add_executable(TakeOrDrop ${SOURCES})
 

@@ -1,15 +1,14 @@
-#include <QMainWindow>
 #include <QPlainTextEdit>
 #include <QCloseEvent>
 #include <QSessionManager>
 #include <QPushButton>
 #include <QLabel>
 
-class MainWindow : public QWidget {
+class GameWindow : public QWidget {
 Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = 0);
+    explicit GameWindow(QWidget *parent = 0);
 
 private:
     void createView();

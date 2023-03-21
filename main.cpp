@@ -2,16 +2,17 @@
 #include <QCommandLineParser>
 #include <QCommandLineOption>
 
-#include "mainwindow.hpp"
+#include "views/MainMenuWindow.hpp"
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
     QCoreApplication::setOrganizationName("QtProject");
-    QCoreApplication::setApplicationName("Application Example");
+    QCoreApplication::setApplicationName("À prendre ou à laisser");
     QCoreApplication::setApplicationVersion(QT_VERSION_STR);
-    MainWindow mainWin;
-    mainWin.resize(800, 500);
-    mainWin.show();
+
+    MainMenuWindow mainMenuWindow;
+    mainMenuWindow.show();
+
+
     return app.exec();
 }
