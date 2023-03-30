@@ -1,6 +1,5 @@
 TEMPLATE=app
-TARGET=window
-QT=core gui widgets
-SOURCES+=main.cpp mainwindow.cpp
-HEADERS+=mainwindow.hpp
-RESOURCES=resources.qrc
+TARGET=apoal
+QT = core gui widgets
+SOURCES+=main.cpp views/GameWindow.cpp views/MainMenuWindow.cpp
+HEADERS+=main.h views/GameWindow.hpp views/MainMenuWindow.hpp

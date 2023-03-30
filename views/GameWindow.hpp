@@ -11,10 +11,18 @@ public:
     explicit GameWindow(QWidget *parent = 0);
 
 private:
-    void createView();
     void openBox(QPushButton* button);
+    void endGame();
+    void askForSelectBox();
+    void selectBox(QPushButton *box);
+    void bankCalling();
+    QLabel *winLabel;
     std::vector<QPushButton *> boxes;
     std::vector<QString> prices;
     std::vector<QLabel *> labels;
-
+    QPoint arthurPos;
+    int boxesRemaining;
+    QLabel *arthur;
+    int selectedBox;
+    bool waitingForBoxSelection;
 };

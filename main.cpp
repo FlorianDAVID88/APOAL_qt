@@ -3,6 +3,7 @@
 #include <QCommandLineOption>
 
 #include "views/MainMenuWindow.hpp"
+#include "views/GameWindow.hpp"
 
 int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
@@ -10,8 +11,10 @@ int main(int argc, char *argv[]) {
     QCoreApplication::setApplicationName("À prendre ou à laisser");
     QCoreApplication::setApplicationVersion(QT_VERSION_STR);
 
-    MainMenuWindow mainMenuWindow;
-    mainMenuWindow.show();
+//    MainMenuWindow mainMenuWindow;
+//    mainMenuWindow.show();
+    GameWindow gameWindow;
+    gameWindow.show();
 
 
     return app.exec();
