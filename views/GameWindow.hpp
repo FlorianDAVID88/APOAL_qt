@@ -25,4 +25,5 @@ private:
     QLabel *arthur;
     int selectedBox;
     bool waitingForBoxSelection;
+    void backToMenuClicked();
 };

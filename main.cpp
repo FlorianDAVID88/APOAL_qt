@@ -11,11 +11,8 @@ int main(int argc, char *argv[]) {
     QCoreApplication::setApplicationName("À prendre ou à laisser");
     QCoreApplication::setApplicationVersion(QT_VERSION_STR);
 
-//    MainMenuWindow mainMenuWindow;
-//    mainMenuWindow.show();
-    GameWindow gameWindow;
-    gameWindow.show();
-
+    MainMenuWindow *mainMenuWindow = new MainMenuWindow();
+    mainMenuWindow->show();
 
     return app.exec();
 }

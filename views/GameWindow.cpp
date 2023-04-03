@@ -1,4 +1,5 @@
 #include "GameWindow.hpp"
+#include "MainMenuWindow.hpp"
 #include <QApplication>
 #include <QPushButton>
 #include <QLabel>
@@ -7,13 +8,13 @@
 #include <QPropertyAnimation>
 #include <QStyle>
 #include <QDesktopWidget>
+#include <random>
 
 QString boxStyle = "QPushButton { background-color: #ffffff; color: #000000; font-weight: bold; }";
 
 GameWindow::GameWindow(QWidget *parent) : QWidget(parent) {
     // Set size of the window
     setFixedSize(900, 400);
-
 
     // Set window position
     setGeometry(
@@ -81,8 +82,8 @@ GameWindow::GameWindow(QWidget *parent) : QWidget(parent) {
     for (int i = 0; i < BOXES; ++i) {
         prices.push_back(EXISTING_PRICES[i]);
     }
-    // Shuffle the prices
-    std::random_shuffle(prices.begin(), prices.end());
+    // Randomize prices
+    std::shuffle(std::begin(prices), std::end(prices), std::mt19937(std::random_device()()));
 
     // Show prices
     const int PRICE_WIDTH = 110;
@@ -228,6 +229,14 @@ void GameWindow::endGame() {
 
     // Show "Vous avez gagné" label
     winLabel->show();
+
+    // Add "Go back to menu" button
+    QPushButton *backToMenu = new QPushButton("Retour au menu", this);
+    backToMenu->setGeometry(900 / 2 - 100, 500 / 2 + 100, 200, 50);
+    backToMenu->setStyleSheet("QPushButton { background-color: #0090D8; color: #ffffff; font-weight: bold; }");
+    backToMenu->setCursor(Qt::PointingHandCursor);
+    connect(backToMenu, &QPushButton::clicked, [=] { this->backToMenuClicked(); });
+    backToMenu->show();
 }
 
 void GameWindow::askForSelectBox() {
@@ -266,4 +275,13 @@ void GameWindow::bankCalling() {
         // Ask for select a box
         askForSelectBox();
     }
+}
+
+void GameWindow::backToMenuClicked() {
+    // Open the menu window
+    MainMenuWindow *menuWindow = new MainMenuWindow();
+    menuWindow->show();
+
+    // Close the game window
+    // this->close();
 }
