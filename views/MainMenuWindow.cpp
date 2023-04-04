@@ -53,34 +53,16 @@ void MainMenuWindow::inputName() {
     input->setLabelText("Nom : ");
 
     if (input->exec() == QDialog::Accepted) {
-        QString name = input->textValue();
-        MainMenuWindow::play(name);
+        std::string namePlayer = input->textValue().toStdString();
+        MainMenuWindow::play();
     }
 }
 
-void MainMenuWindow::play(QString playerName) {
-    //Box choice
-    // MainMenuWindow::boxChoice(playerName);
-
+void MainMenuWindow::play() {
     // Create a new game
     GameWindow *gameWindow = new GameWindow();
     gameWindow->show();
 
     // Hide this window
     this->hide();
-}
-
-void MainMenuWindow::boxChoice(QString playerName) {
-    QInputDialog *input = new QInputDialog();
-    input->setWindowTitle("Choix de la boîte");
-    input->setLabelText("Choisissez la boîte avec laquelle vous voulez jouer, " + playerName + " :");
-    input->exec();
-
-    bool ok;
-    int value = input->textValue().toInt(&ok);
-
-    while (!ok || QString::number(value) != input->textValue() || value > 24 || value < 1) {
-        input->exec();
-        value = input->textValue().toInt(&ok);
-    }
 }

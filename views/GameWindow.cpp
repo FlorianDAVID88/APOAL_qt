@@ -215,51 +215,59 @@ void GameWindow::openBox(QPushButton *button) {
  * 25th box choice
  */
 void GameWindow::box25() {
+    QString path = QCoreApplication::applicationDirPath();
+    QLabel *logo_box = new QLabel(this);
+    logo_box->setGeometry(40, 100, 250, 250);
+
+    QPixmap pixmapLB(path + "/assets/logo_box.png");
+    logo_box->setPixmap(pixmapLB.scaled(250, 250, Qt::KeepAspectRatio));
+    logo_box->setStyleSheet("QLabel { background-color : transparent; }");
+    logo_box->show();
+
+    QLabel *qu25 = new QLabel(this);
+    qu25->setText("Ouvrir la 25e boîte ?");
+    qu25->setGeometry(450, 0, 450, 400);
+    qu25->setAlignment(Qt::AlignCenter);
+    qu25->setStyleSheet("QLabel { background-color: transparent; color: #ffffff; font-weight: bold; font-size: 32px; }");
+    qu25->show();
+
     QLabel *zero = new QLabel(this);
     zero->setText("0 €");
     zero->setAlignment(Qt::AlignCenter);
     zero->setStyleSheet("QLabel { background-color: #1f1f1f; color: white; font-weight: bold; font-size: 32px; }");
-    zero->setGeometry(40, 40, 160, 40);
+    zero->setGeometry(107.5, 40, 160, 40);
     zero->show();
 
     QLabel *divide = new QLabel(this);
     divide->setText("÷2");
     divide->setAlignment(Qt::AlignCenter);
     divide->setStyleSheet("QLabel { background-color: red; color: white; font-weight: bold; font-size: 32px; }");
-    divide->setGeometry(215, 40, 160, 40);
+    divide->setGeometry(282.5, 40, 160, 40);
     divide->show();
 
     QLabel *more1000 = new QLabel(this);
     more1000->setText("+ 1 000 €");
     more1000->setAlignment(Qt::AlignCenter);
     more1000->setStyleSheet("QLabel { background-color: yellow; color: black; font-weight: bold; font-size: 32px; }");
-    more1000->setGeometry(390, 40, 160, 40);
+    more1000->setGeometry(457.5, 40, 160, 40);
     more1000->show();
 
     QLabel *multiply = new QLabel(this);
     multiply->setText("x2");
     multiply->setAlignment(Qt::AlignCenter);
     multiply->setStyleSheet("QLabel { background-color: gold; color: black; font-weight: bold; font-size: 32px; }");
-    multiply->setGeometry(565, 40, 160, 40);
+    multiply->setGeometry(632.5, 40, 160, 40);
     multiply->show();
 
     QPushButton *buttonAccept = new QPushButton("OUVRIR", this);
-    buttonAccept->setGeometry(250, 350, 100, 20);
+    buttonAccept->setGeometry(340, 350, 100, 20);
     buttonAccept->setStyleSheet("QPushButton { background-color: gold; color: #000000; font-weight: bold; }");
     buttonAccept->show();
 
     QPushButton *buttonRefuse = new QPushButton("NE PAS OUVRIR", this);
-    buttonRefuse->setGeometry(370, 350, 100, 20);
+    buttonRefuse->setGeometry(460, 350, 100, 20);
     buttonRefuse->setStyleSheet("QPushButton { background-color: red; color: white; font-weight: bold; }");
     buttonRefuse->show();
-
-    QLabel *qu25 = new QLabel(this);
-    qu25->setText("Ouvrir la 25e boîte ?");
-    //qu25->setGeometry(200, 200, 200, 200);
-    qu25->setAlignment(Qt::AlignCenter);
-    qu25->setStyleSheet(
-            "QLabel { background-color: transparent; color: #ffffff; font-weight: bold; font-size: 32px; }");
-    qu25->show();
 
     connect(buttonAccept, &QPushButton::clicked, [=] {
         zero->hide();
@@ -300,7 +308,7 @@ void GameWindow::endAPOAL(QPushButton *button) {
             resp.replace(resp.find(','), 1, ".");
         }
 
-        if (!isdigit(resp[0])) {
+        if (!isdigit(resp[0])) {    //If the object was won
             switch (random) {
                 case 1 :
                     resp = "0 €";
@@ -332,7 +340,7 @@ void GameWindow::endAPOAL(QPushButton *button) {
                     break;
             }
 
-            if (value < 1) {
+            if (value < 1 && value > 0) {
                 std::ostringstream oss;
                 oss << std::fixed << std::setprecision(2) << value;
                 resp = oss.str() + " €";
@@ -392,7 +400,7 @@ void GameWindow::endGame() {
 
 
     QPushButton *goTo25 = new QPushButton("25E BOÎTE", this);
-    goTo25->setGeometry(50, 25, 100, 20);
+    goTo25->setGeometry(400, 300, 100, 20);
     goTo25->setStyleSheet("QPushButton { background-color: gold; color: black; font-weight: bold; }");
     goTo25->show();
 
@@ -426,7 +434,7 @@ void GameWindow::endGame() {
 void GameWindow::askForSelectBox() {
     // Show dialog box in the middle of the screen
     QMessageBox msgBox;
-    msgBox.setText("Veuillez sélectionner une boite");
+    msgBox.setText("Veuillez sélectionner une boite !");
     msgBox.exec();
 
     waitingForBoxSelection = true;
@@ -468,5 +476,5 @@ void GameWindow::backToMenuClicked() {
     menuWindow->show();
 
     // Close the game window
-    // this->close();
+    this->close();
 }

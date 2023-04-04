@@ -6,7 +6,6 @@ class MainMenuWindow : public QWidget {
 public:
     explicit MainMenuWindow(QWidget *parent = 0);
 private:
-    void play(QString playerName);
-    void boxChoice(QString playerName);
+    void play();
     void inputName();
 };
