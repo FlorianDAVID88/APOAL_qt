@@ -16,7 +16,10 @@ private:
     void askForSelectBox();
     void selectBox(QPushButton *box);
     void bankCalling();
+    void box25();
+    void endAPOAL(QPushButton *button);
     QLabel *winLabel;
+    QLabel *finalPrice;
     std::vector<QPushButton *> boxes;
     std::vector<QString> prices;
     std::vector<QLabel *> labels;
